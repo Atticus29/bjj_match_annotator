@@ -47,11 +47,11 @@ public class MatchTest {
   }
 
 
-  // @Test
-  // publid void save_allowsUsToRetrieveASavedMatch_true(){
-  //   Match retrievedMatch = Match.all().get(0);
-  //   assertTrue(testMatch.equals(retrievedMatch));
-  // }
+  @Test
+  public void save_allowsUsToRetrieveASavedMatch_true(){
+    Match retrievedMatch = Match.all().get(0);
+    assertTrue(testMatch.equals(retrievedMatch));
+  }
 
   @Test
   public void equals_returnsWhetherTwoMatchesAreIdentical_true(){
