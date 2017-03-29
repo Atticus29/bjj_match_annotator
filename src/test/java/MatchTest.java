@@ -3,18 +3,20 @@ import org.junit.*;
 import static org.junit.Assert.*;
 
 public class MatchTest {
+  private Match testMatch;
 
   @Before
   public void setUp() {
-    DB.sql2o = new Sql2o("jdbc:postgresql://localhost:5432/java_jitsu_test", null, null);
+    testMatch = new Match("Finney_vs_Fisher_Bantam_Worlds_Gi_Final", "IBJJF Gi Worlds","Long Beach, CA" ,"05-01-2017", "Mark Fisher", "Chris Finney", "Bantam", "Brown",
+    "Brown");
   }
 
-  @After
-  public void tearDown() {
-    try (Connection con = DB.sql2o.open()) {
-      String sql = "DELETE FROM name_of_your_table *;";
-      con.createQuery(sql).executeUpdate();
-    }
+  @Rule
+  public DatabaseRule database = new DatabaseRule();
+
+  @Test
+  public void match_instantiatesCorrectly(){
+    assertTrue(testMatch instanceof Match);
   }
 
 }
