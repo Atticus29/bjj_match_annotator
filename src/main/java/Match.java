@@ -108,4 +108,14 @@ public class Match {
     }
   }
 
+  public static Match find(int id){
+    try(Connection con = DB.sql2o.open()){
+      String sqlCommand = "SELECT * FROM matches WHERE id=:id;";
+      Match result = con.createQuery(sqlCommand)
+        .addParameter("id", id)
+        .executeAndFetchFirst(Match.class);
+      return result;
+    }
+  }
+
 }
