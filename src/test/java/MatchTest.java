@@ -9,7 +9,7 @@ public class MatchTest {
   public void setUp() {
     testMatch = new Match("Finney_vs_Fisher_Bantam_Worlds_Gi_Final", "IBJJF Gi Worlds","Long Beach, CA" ,"05-01-2017", "Mark Fisher", "Chris Finney", "Bantam", "Brown",
     "Brown");
-    // testMatch.save();
+    testMatch.save();
   }
 
   @Rule
@@ -35,14 +35,34 @@ public class MatchTest {
     assertEquals(4, testMatch.getId());
   }
 
-  // @Test
-  // public void equals_returnsWhetherTwoMatchesAreIdentical_true(){
-  //
-  // }
+  @Test
+  public void all_returnsListOfMatches_List(){
+      Match testMatch2 = new Match("Mendes_vs_Miyao_Light_Worlds_Gi_Final", "IBJJF Gi Worlds","Long Beach, CA" ,"05-01-2017", "Rafael Mendes", "Paulo Miyao", "Light", "Black",
+      "Black");
+      testMatch2.save();
+      System.out.println("Size is " + Match.all().size());
+      // assertTrue(2,Match.all().size());
+      assertEquals(true, Match.all().get(0).equals(testMatch));
+      assertEquals(true, Match.all().get(1).equals(testMatch2));
+  }
+
 
   // @Test
-  // public void all_returnsListOfMatches_List(){
-  //
+  // publid void save_allowsUsToRetrieveASavedMatch_true(){
+  //   Match retrievedMatch = Match.all().get(0);
+  //   assertTrue(testMatch.equals(retrievedMatch));
   // }
+
+  @Test
+  public void equals_returnsWhetherTwoMatchesAreIdentical_true(){
+    Match testMatch2 = new Match("Mendes_vs_Miyao_Light_Worlds_Gi_Final", "IBJJF Gi Worlds","Long Beach, CA" ,"05-01-2017", "Rafael Mendes", "Paulo Miyao", "Light", "Black",
+    "Black");
+    testMatch2.setId(1);
+    Match testMatch3 = new Match("Mendes_vs_Miyao_Light_Worlds_Gi_Final", "IBJJF Gi Worlds","Long Beach, CA" ,"05-01-2017", "Rafael Mendes", "Paulo Miyao", "Light", "Black",
+    "Black");
+    testMatch3.setId(1);
+    assertTrue(testMatch2.equals(testMatch3));
+  }
+
 
 }

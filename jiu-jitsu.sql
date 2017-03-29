@@ -41,9 +41,9 @@ CREATE TABLE matches (
     date character varying,
     athlete_1_name character varying,
     athlete_2_name character varying,
-    weight_class numeric,
     athlete_1_belt character varying,
-    athlete_2_belt character varying
+    athlete_2_belt character varying,
+    weight_class character varying
 );
 
 
@@ -124,7 +124,7 @@ ALTER TABLE ONLY moves ALTER COLUMN id SET DEFAULT nextval('moves_id_seq'::regcl
 -- Data for Name: matches; Type: TABLE DATA; Schema: public; Owner: Guest
 --
 
-COPY matches (id, name, host_org, location, date, athlete_1_name, athlete_2_name, weight_class, athlete_1_belt, athlete_2_belt) FROM stdin;
+COPY matches (id, name, host_org, location, date, athlete_1_name, athlete_2_name, athlete_1_belt, athlete_2_belt, weight_class) FROM stdin;
 \.
 
 
@@ -167,12 +167,12 @@ ALTER TABLE ONLY moves
 
 
 --
--- Name: public; Type: ACL; Schema: -; Owner: epicodus
+-- Name: public; Type: ACL; Schema: -; Owner: Guest
 --
 
 REVOKE ALL ON SCHEMA public FROM PUBLIC;
-REVOKE ALL ON SCHEMA public FROM epicodus;
-GRANT ALL ON SCHEMA public TO epicodus;
+REVOKE ALL ON SCHEMA public FROM "Guest";
+GRANT ALL ON SCHEMA public TO "Guest";
 GRANT ALL ON SCHEMA public TO PUBLIC;
 
 

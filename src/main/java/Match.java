@@ -1,4 +1,5 @@
 import org.sql2o.*;
+import java.util.List;
 
 public class Match {
   private int id;
@@ -78,6 +79,33 @@ public class Match {
   }
   public String getAthlete_2_belt(){
     return this.athlete_2_belt;
+  }
+
+  public void save(){
+    try(Connection con = DB.sql2o.open()){
+      String sqlCommand = "INSERT INTO matches (name, host_org, location, date, athlete_1_name, athlete_2_name, weight_class, athlete_1_belt, athlete_2_belt) VALUES (:name, :host_org, :location, :date, :athlete_1_name, :athlete_2_name, :weight_class, :athlete_1_belt, :athlete_2_belt);";
+      this.id = (int) con.createQuery(sqlCommand, true)
+        .addParameter("name", this.name)
+        .addParameter("host_org", this.host_org)
+        .addParameter("location", this.location)
+        .addParameter("date", this.date)
+        .addParameter("athlete_1_name", this.athlete_1_name)
+        .addParameter("athlete_2_name", this.athlete_2_name)
+        .addParameter("weight_class", this.weight_class)
+        .addParameter("athlete_1_belt", this.athlete_1_belt)
+        .addParameter("athlete_2_belt", this.athlete_2_belt)
+        .executeUpdate()
+        .getKey();
+    }
+  }
+
+  public static List<Match> all(){
+    try(Connection con= DB.sql2o.open()){
+      String sqlCommand = "SELECT * FROM matches;";
+      List<Match> results = con.createQuery(sqlCommand)
+        .executeAndFetch(Match.class);
+      return results;
+    }
   }
 
 }
