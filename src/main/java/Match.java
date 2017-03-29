@@ -26,7 +26,7 @@ public class Match {
 
   @Override
   public boolean equals(Object match2){
-    if(! match2 instanceof Match){
+    if(! (match2 instanceof Match)){
       return false;
     } else{
       Match newMatch = (Match) match2;
@@ -36,9 +36,10 @@ public class Match {
       this.getDate().equals(newMatch.getDate()) &&
       this.getAthlete_1_name().equals(newMatch.getAthlete_1_name()) &&
       this.getAthlete_2_name().equals(newMatch.getAthlete_2_name()) &&
-      this.getWeight_class().equals(newMatch.ggetWeight_class()) &&
+      this.getWeight_class().equals(newMatch.getWeight_class()) &&
       this.getAthlete_1_belt().equals(newMatch.getAthlete_1_belt()) &&
-      this
+      this.getAthlete_2_belt().equals(newMatch.getAthlete_2_belt()) &&
+      this.getId() == newMatch.getId();
     }
   }
 
