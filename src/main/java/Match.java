@@ -127,4 +127,23 @@ public class Match {
     }
   }
 
+  public void update(String name, String host, String location, String date, String a1Name, String a2Name, String weight_class, String a1Belt, String a2Belt){
+    String sqlCommand = "UPDATE matches SET name=:name, host_org=:host, location=:location, date=:date, athlete_1_name=:a1Name, athlete_2_name=:a2Name, weight_class=:weight_class, athlete_1_belt=:a1Belt, athlete_2_belt=:a2Belt WHERE id=:id;";
+    System.out.println("ID from update function is " + this.id);
+    try(Connection con = DB.sql2o.open()){
+      con.createQuery(sqlCommand)
+      .addParameter("name", name)
+      .addParameter("host", host)
+      .addParameter("location", location)
+      .addParameter("date", date)
+      .addParameter("a1Name", a1Name)
+      .addParameter("a2Name", a2Name)
+      .addParameter("weight_class", weight_class)
+      .addParameter("a1Belt", a1Belt)
+      .addParameter("a2Belt", a2Belt)
+      .addParameter("id", this.id)
+      .executeUpdate();
+    }
+  }
+
 }

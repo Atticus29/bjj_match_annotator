@@ -80,4 +80,11 @@ public class MatchTest {
     assertEquals(null, Match.find(testMatchID));
   }
 
+  @Test
+  public void update_changesContentsOfMatchFromDataBase_true(){
+    testMatch.update("Mendes_vs_Miyao_Light_Worlds_Gi_Final", "IBJJF Gi Worlds","Long Beach, CA" ,"05-01-2017", "Rafael Mendes", "Gui Mendes", "Light", "Black", "Black");
+    int testId = testMatch.getId();
+    assertEquals("Gui Mendes", Match.find(testId).getAthlete_2_name());
+  }
+
 }
