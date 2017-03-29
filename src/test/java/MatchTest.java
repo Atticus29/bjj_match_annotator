@@ -37,13 +37,13 @@ public class MatchTest {
 
   @Test
   public void all_returnsListOfMatches_List(){
-      Match testMatch2 = new Match("Mendes_vs_Miyao_Light_Worlds_Gi_Final", "IBJJF Gi Worlds","Long Beach, CA" ,"05-01-2017", "Rafael Mendes", "Paulo Miyao", "Light", "Black",
-      "Black");
-      testMatch2.save();
-      // System.out.println("Size is " + Match.all().size());
-      // assertTrue(2,Match.all().size());
-      assertEquals(true, Match.all().get(0).equals(testMatch));
-      assertEquals(true, Match.all().get(1).equals(testMatch2));
+    Match testMatch2 = new Match("Mendes_vs_Miyao_Light_Worlds_Gi_Final", "IBJJF Gi Worlds","Long Beach, CA" ,"05-01-2017", "Rafael Mendes", "Paulo Miyao", "Light", "Black",
+    "Black");
+    testMatch2.save();
+    // System.out.println("Size is " + Match.all().size());
+    // assertTrue(2,Match.all().size());
+    assertEquals(true, Match.all().get(0).equals(testMatch));
+    assertEquals(true, Match.all().get(1).equals(testMatch2));
   }
 
 
@@ -71,8 +71,13 @@ public class MatchTest {
     testMatch2.save();
     System.out.println("Id is " + testMatch2.getId());
     assertEquals(testMatch2, Match.find(testMatch2.getId()));
-
   }
 
+  @Test
+  public void delete_RemovesMatchFromDataBase_true(){
+    int testMatchID = testMatch.getId();
+    testMatch.delete();
+    assertEquals(null, Match.find(testMatchID));
+  }
 
 }

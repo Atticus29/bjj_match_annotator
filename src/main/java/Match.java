@@ -118,4 +118,13 @@ public class Match {
     }
   }
 
+  public void delete(){
+    String sqlCommand = "DELETE FROM matches WHERE id = :id;";
+    try(Connection con = DB.sql2o.open()){
+      con.createQuery(sqlCommand)
+        .addParameter("id", this.id)
+        .executeUpdate();
+    }
+  }
+
 }
