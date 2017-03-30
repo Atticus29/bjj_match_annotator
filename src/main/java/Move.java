@@ -103,4 +103,6 @@ public class Move {
     }
   }
 
+  // Validate difficult input method here
+
 }

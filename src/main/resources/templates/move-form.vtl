@@ -1,0 +1,68 @@
+<!-- move-form.vtl -->
+#if ($origin == "new-match")
+<div class="jumbotron">
+  Match Created!
+</div>
+#else
+<div class="jumbotron">
+  Edit Moves
+</div>
+#end
+
+<h2>$match.getName()</h2>
+<p>Add a move to this match</p>
+<form action="/matches/$match.getId()" method="post">
+  <select class="form-control" id="move-name" name="move-name" type="text">
+    <option>arm bar</option>
+    <option>triangle choke</option>
+    <option>guillotine (arm out)</option>
+    <option>guillotine (arm in)</option>
+    <option>d'arce/brabo choke</option>
+    <option>peruvian necktie</option>
+    <option>anaconda choke</option>
+    <option>back take</option>
+    <option>rear naked choke/mata leon</option>
+    <option>bow-and-arrow choke</option>
+    <option>paper cutter choke</option>
+    <option>cross-collar choke</option>
+    <option>baseball bat choke</option>
+    <option>loop choke</option>
+    <option>north south/munson choke</option>
+    <option>Ezekial choke</option>
+    <option>omoplata</option>
+    <option>gogoplata</option>
+    <option>locoplata</option>
+    <option>baratoplata</option>
+    <option>monoplata</option>
+    <option>guard pass</option>
+    <option>leg drag pass</option>
+    <option>toreando pass</option>
+    <option>smash pass</option>
+    <option>knee slice pass</option>
+    <option>over under pass</option>
+    <option>double under pass</option>
+    <option>ankle pick</option>
+    <option>scissor sweep</option>
+    <option>flower sweep</option>
+    <option>leg lasso sweep</option>
+    <option>de la Riva sweep</option>
+    <option>berimbolo sweep</option>
+    <option>worm guard sweep</option>
+    <option>double leg take down</option>
+    <option>single leg take down</option>
+    <option>hip toss</option>
+    <option>osoto gari</option>
+    <option>mount</option>
+    <option>knee-on-belly</option>
+    <option>hip bump sweep</option>
+  </select>
+  <!-- <input type="hidden" name="match-id" value="$match.getId()"> -->
+  <label for="description">Brief description of move</label>
+  <input type="text" name="description" class="form-control">
+  <label for="difficulty">Difficulty (Beginner, Intermediate, Advanced)</label>
+  <input type="text" name="difficulty" class="form-control">
+  <button type="submit" class="btn btn-success">Add Move</button>
+</form>
+
+
+<!-- move-form.vtl -->
