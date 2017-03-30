@@ -1,29 +1,57 @@
 <!-- match-form.vtl -->
 <div class="row">
-  <h2>Create a New Match</h2>
-  <form class="well" action="/matches/new/moves/new" method="post">
-    <label for="match-name">Match Name</label>
-    <input type="text" name="match-name" id="match-name" class="form-control" required>
-    <label for="host-org">Host Organization</label>
-    <input type="text" name="host-org" id="host-org" class="form-control" required>
-    <label for="location">Location</label>
-    <input type="text" name="location" id="location" class="form-control" required>
-    <label for="date">Date</label>
-    <input type="text" name="date" id="date" class="form-control" required>
-    <label for="athlete-1-name">Athlete One (left)</label>
-    <input type="text" name="athlete-1-name" id="athlete-1-name" class="form-control" required>
-    <label for="athlete-2-name">Athlete Two (right)</label>
-    <input type="text" name="athlete-2-name" id="athlete-2-name" class="form-control" required>
-    <label for="weight-class">Weight Class</label>
-    <input type="text" name="weight-class" id="weight-class" class="form-control" required>
-    <label for="athlete-1-belt">Athlete One Belt Level</label>
-    <input type="text" name="athlete-1-belt" id="athlete-1-belt" class="form-control" required>
-    <label for="athlete-2-belt">Athlete Two Belt Level</label>
-    <input type="text" name="athlete-2-belt" id="athlete-2-belt" class="form-control" required>
-    <label for="match-url">Match URL</label>
-    <input type="text" name="match-url" id="match-url" class="form-control" required>
-    <input type="hidden" name="origin" value="new-match">
-    <button type="submit" class="btn btn-success">Add Match</button>
-  </form>
-</div>
+  #if ($origin == "new")
+    <h2>Create a New Match</h2>
+    <form class="well" action="/matches/new/moves/new" method="post">
+      <label for="match-name">Match Name</label>
+      <input type="text" name="match-name" id="match-name" class="form-control" required>
+      <label for="host-org">Host Organization</label>
+      <input type="text" name="host-org" id="host-org" class="form-control" required>
+      <label for="location">Location</label>
+      <input type="text" name="location" id="location" class="form-control" required>
+      <label for="date">Date</label>
+      <input type="text" name="date" id="date" class="form-control" required>
+      <label for="athlete-1-name">Athlete One (left)</label>
+      <input type="text" name="athlete-1-name" id="athlete-1-name" class="form-control" required>
+      <label for="athlete-2-name">Athlete Two (right)</label>
+      <input type="text" name="athlete-2-name" id="athlete-2-name" class="form-control" required>
+      <label for="weight-class">Weight Class</label>
+      <input type="text" name="weight-class" id="weight-class" class="form-control" required>
+      <label for="athlete-1-belt">Athlete One Belt Level</label>
+      <input type="text" name="athlete-1-belt" id="athlete-1-belt" class="form-control" required>
+      <label for="athlete-2-belt">Athlete Two Belt Level</label>
+      <input type="text" name="athlete-2-belt" id="athlete-2-belt" class="form-control" required>
+      <label for="match-url">Match URL</label>
+      <input type="text" name="match-url" id="match-url" class="form-control" required>
+      <input type="hidden" name="origin" value="new-match">
+      <button type="submit" class="btn btn-success">Add Match</button>
+    </form>
+  #else
+    <h2>Edit Match</h2>
+    <form class="well" action="/matches/$match.getId()" method="post">
+      <label for="match-name">Match Name</label>
+      <input type="text" name="match-name" id="match-name" class="form-control" value="$match.getName()" required>
+      <label for="host-org">Host Organization</label>
+      <input type="text" name="host-org" id="host-org" class="form-control" value = "$match.getHost_org()" required>
+      <label for="location">Location</label>
+      <input type="text" name="location" id="location" class="form-control" value="$match.getLocation()" required>
+      <label for="date">Date</label>
+      <input type="text" name="date" id="date" class="form-control" required value="$match.getDate()">
+      <label for="athlete-1-name">Athlete One (left)</label>
+      <input type="text" name="athlete-1-name" id="athlete-1-name" class="form-control" required value="$match.getAthlete_1_name()">
+      <label for="athlete-2-name">Athlete Two (right)</label>
+      <input type="text" name="athlete-2-name" id="athlete-2-name" class="form-control" required value="$match.getAthlete_2_name()">
+      <label for="weight-class">Weight Class</label>
+      <input type="text" name="weight-class" id="weight-class" class="form-control" required value="$match.getWeight_class()">
+      <label for="athlete-1-belt">Athlete One Belt Level</label>
+      <input type="text" name="athlete-1-belt" id="athlete-1-belt" class="form-control" required value="$match.getAthlete_1_belt()">
+      <label for="athlete-2-belt">Athlete Two Belt Level</label>
+      <input type="text" name="athlete-2-belt" id="athlete-2-belt" class="form-control" required value="$match.getAthlete_2_belt()">
+      <label for="match-url">Match URL</label>
+      <input type="text" name="match-url" id="match-url" class="form-control" required value="$match.getMatchURL()">
+      <input type="hidden" name="origin" value="update">
+      <button type="submit" class="btn btn-success">Update Match</button>
+    </form>
+  #end
+  </div>
 <!-- match-form.vtl -->

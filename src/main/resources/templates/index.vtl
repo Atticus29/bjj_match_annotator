@@ -11,5 +11,13 @@
     add moves
   </div>
 </div>
+<div class="row" id="row2">
+  #foreach ($match in $matches)
+    <a href="/matches/$match.getId()">$match.getName()</a><br>
+  #end
+</div>
+<div class="row" id="row3">
+  <a href="/matches/new" class="btn btn-success">Create New Match</a>
+</div>
 
 <!--index.vtl-->

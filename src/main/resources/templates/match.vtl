@@ -8,9 +8,21 @@
 <li>$match.getAthlete_1_name() - $match.getAthlete_1_belt()-belt</li>
 <li>$match.getAthlete_2_name() - $match.getAthlete_2_belt()-belt</li>
 <li>$match.getWeight_class()</li>
-<li>
   <iframe width="560" height="315" src="$match.getMatchURL()" frameborder="0" allowfullscreen></iframe>
-</li>
 <h4>Moves</h4>
+#foreach ($move in $moves)
+  <li><a href="/matches/$match.getId()/moves/$move.getId()">$move.getName()</a></li>
+#end
 
+
+<form action="/matches/$match.getId()/delete" method="post">
+    <button type="submit" class="btn btn-danger">Delete Match</button>
+</form>
+<!-- <form action="/matches/$match.getId()" method="post">
+  <input type="hidden" name="origin" value="update">
+  <button type="submit" class="btn btn-info">Edit Match Details</button>
+</form> -->
+<a href="/matches/$match.getId()/edit" class="btn btn-info">Edit Match Details</a>
+<br>
+<a href="/matches/$match.getId()/moves/new">Add another move</a>
 <!-- match.vtl -->
