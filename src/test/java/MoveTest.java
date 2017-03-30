@@ -82,7 +82,11 @@ public class MoveTest {
   public void update_changesContentOfMove_true() {
     Move myMove = new Move(1, "guillotine choke", "forward-facing choke hold", "beginner");
     myMove.save();
+    System.out.println("ID before update is " + myMove.getId());
     myMove.update(1, "guillotine choke", "forward-facing choke hold", "intermediate");
+    System.out.println("ID after update is " + myMove.getId());
+    System.out.println("Number of entries is " + Move.all().size());
+
     assertEquals("intermediate", Move.find(myMove.getId()).getDifficulty());
   }
 }

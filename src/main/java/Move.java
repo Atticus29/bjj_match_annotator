@@ -82,13 +82,13 @@ public class Move {
   }
 
   public void update(int matchId, String name, String description, String difficulty) {
-      String sql = "UPDATE moves SET match_id = :match_id, name = :name, description = :description, difficulty = :difficulty WHERE id = :id;";
+      String sql = "UPDATE moves SET match_id=:match_id, name=:name, description=:description, difficulty=:difficulty WHERE id=:id;";
       try(Connection con = DB.sql2o.open()) {
         con.createQuery(sql)
-          .addParameter("match_id", this.match_id)
-          .addParameter("name", this.name)
-          .addParameter("description", this.description)
-          .addParameter("difficulty", this.difficulty)
+          .addParameter("match_id", match_id)
+          .addParameter("name", name)
+          .addParameter("description", description)
+          .addParameter("difficulty", difficulty)
           .addParameter("id", this.id)
           .executeUpdate();
         }
