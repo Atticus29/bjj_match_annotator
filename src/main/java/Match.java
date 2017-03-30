@@ -107,6 +107,16 @@ public class Match {
     }
   }
 
+  public List<Move> getMoves(int matchID){
+    String sqlCommand = "SELECT * from moves WHERE match_id=:matchID;";
+    try(Connection con = DB.sql2o.open()){
+      List<Move> moves = con.createQuery(sqlCommand)
+        .addParameter("matchID", matchID)
+        .executeAndFetch(Move.class);
+        return moves;
+    }
+  }
+
   public static List<Match> all(){
     try(Connection con= DB.sql2o.open()){
       String sqlCommand = "SELECT * FROM matches;";

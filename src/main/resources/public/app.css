@@ -1,4 +1,12 @@
 #home-image {
   float: left;
-  height: 50px;
+}
+
+#layout-color {
+  background-color: #c1c1c1;
+  text-align: center;
+}
+
+.home-explain {
+  border: 1px solid black;
 }

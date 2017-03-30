@@ -50,7 +50,7 @@ public class MatchTest {
 
   @Test
   public void save_allowsUsToRetrieveASavedMatch_true(){
-    Match retrievedMatch = Match.all().get(0);
+    Match retrievedMatch = Match.find(testMatch.getId());
     assertTrue(testMatch.equals(retrievedMatch));
   }
 
@@ -86,6 +86,17 @@ public class MatchTest {
     testMatch.update("Mendes_vs_Miyao_Light_Worlds_Gi_Final", "IBJJF Gi Worlds","Long Beach, CA" ,"05-01-2017", "Rafael Mendes", "Gui Mendes", "Light", "Black", "Black", "https://youtu.be/AYdi8oupOcs");
     int testId = testMatch.getId();
     assertEquals("Gui Mendes", Match.find(testId).getAthlete_2_name());
+  }
+
+  @Test
+  public void getMoves_getsListOfMoves(){
+    Move myMove1 = new Move(testMatch.getId(), "guillotine choke", "forward-facing choke hold", "beginner");
+    myMove1.save();
+    Move myMove2 = new Move(testMatch.getId(), "omoplata", "shoulder crank", "intermediate");
+    myMove2.save();
+    assertEquals(2,testMatch.getMoves(testMatch.getId()).size());
+    assertEquals(myMove1, testMatch.getMoves(testMatch.getId()).get(0));
+    assertEquals(myMove2, testMatch.getMoves(testMatch.getId()).get(1));
   }
 
 }

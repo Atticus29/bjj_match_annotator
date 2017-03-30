@@ -53,7 +53,10 @@ public class App {
       String difficulty = request.queryParams("difficulty");
       Move newMove = new Move(matchid, name, description, difficulty);
       newMove.save();
-      model.put("matchid", matchid);
+      // model.put("matches", Match.all());
+      model.put("match", Match.find(matchid));
+
+      // model.put("matchid", matchid);
       model.put("template", "templates/match.vtl");
       return new ModelAndView(model, layout);
     }, new VelocityTemplateEngine());
