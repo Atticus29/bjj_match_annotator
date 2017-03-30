@@ -54,18 +54,40 @@ public class MoveTest {
     assertEquals(true, Move.all().get(1).equals(secondMove));
   }
 
-  // @Test
-  // public void save_() {
-  //   Move myMove = new Move(1, "guillotine choke", "forward-facing choke hold", "beginner");
-  //   myMove.save();
-  //
-  // }
+  @Test
+  public void save_returnsTrueIfPropertiesAreTheSame() {
+    Move myMove = new Move(1, "guillotine choke", "forward-facing choke hold", "beginner");
+    myMove.save();
+    assertTrue(Move.all().get(0).equals(myMove));
+  }
+
+  @Test
+  public void save_assignsIdToObject() {
+    Move myMove = new Move(1, "guillotine choke", "forward-facing choke hold", "beginner");
+    myMove.save();
+    Move savedMove = Move.all().get(0);
+    assertEquals(myMove.getId(), savedMove.getId());
+  }
+
+  @Test
+  public void find_returnsMoveWithSameId_secondMove() {
+    Move firstMove = new Move(1, "guillotine choke", "forward-facing choke hold", "beginner");
+    firstMove.save();
+    Move secondMove = new Move(1, "armbar", "forced hyperextension of the shoulder and elbow joints", "intermediate");
+    secondMove.save();
+    assertEquals(Move.find(secondMove.getId()), secondMove);
+  }
+
+  @Test
+  public void update_changesContentOfMove_true() {
+    Move myMove = new Move(1, "guillotine choke", "forward-facing choke hold", "beginner");
+    myMove.save();
+    myMove.update(1, "guillotine choke", "forward-facing choke hold", "intermediate");
+    assertEquals("intermediate", Move.find(myMove.getId()).getDifficulty());
+  }
 }
 
 // methods to create:
-//
-// static all()
-// static find()
-// save()
+
 // update()
 // delete()

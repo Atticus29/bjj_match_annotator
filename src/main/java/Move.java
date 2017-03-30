@@ -1,23 +1,24 @@
 
 import org.sql2o.*;
+import java.util.List;
 
 public class Move {
   private int id;
-  private int matchId;
+  private int match_id;
   private String name;
   private String description;
   private String difficulty;
 
 
   public Move(int matchId, String name, String description, String difficulty) {
-    this.matchId = matchId;
+    this.match_id = matchId;
     this.name = name;
     this.description = description;
     this.difficulty = difficulty;
   }
 
   public int getMatchId() {
-    return matchId;
+    return match_id;
   }
 
   public String getName() {
@@ -32,20 +33,28 @@ public class Move {
     return difficulty;
   }
 
+  public int getId() {
+    return id;
+  }
+
   public static List<Move> all() {
     String sql = "SELECT * FROM moves;";
-    try(Connection con = DB.sql2o.open())
+    try(Connection con = DB.sql2o.open()) {
+      List<Move> allMoves = con.createQuery(sql).executeAndFetch(Move.class);
+      return allMoves;
+    }
   }
 
   public void save() {
     try(Connection con = DB.sql2o.open()) {
-      String sql = "INSERT INTO moves (matchId, name, description, difficulty) VALUES (:matchId, :name, :description, :difficulty)";
-        con.createQuery(sql)
-        .addParameter("matchId", this.matchId)
-        .addParameter("name", this.name)
-        .addParameter("description", this.description)
-        .addParameter("difficulty", this.difficulty)
-        .executeUpdate();
+      String sql = "INSERT INTO moves (match_id, name, description, difficulty) VALUES (:match_id, :name, :description, :difficulty)";
+        this.id = (int) con.createQuery(sql, true)
+          .addParameter("match_id", this.match_id)
+          .addParameter("name", this.name)
+          .addParameter("description", this.description)
+          .addParameter("difficulty", this.difficulty)
+          .executeUpdate()
+          .getKey();
     }
   }
 
@@ -61,4 +70,28 @@ public class Move {
              this.getMatchId() == newMove.getMatchId();
     }
   }
+
+  public static Move find(int id) {
+    try(Connection con = DB.sql2o.open()) {
+      String sql = "SELECT * FROM moves WHERE id = :id;";
+      Move myMove = con.createQuery(sql)
+        .addParameter("id", id)
+        .executeAndFetchFirst(Move.class);
+      return myMove;
+    }
+  }
+
+  public void update(int matchId, String name, String description, String difficulty) {
+      String sql = "UPDATE moves SET match_id = :match_id, name = :name, description = :description, difficulty = :difficulty WHERE id = :id;";
+      try(Connection con = DB.sql2o.open()) {
+        con.createQuery(sql)
+          .addParameter("match_id", this.match_id)
+          .addParameter("name", this.name)
+          .addParameter("description", this.description)
+          .addParameter("difficulty", this.difficulty)
+          .addParameter("id", this.id)
+          .executeUpdate();
+        }
+  }
+
 }
