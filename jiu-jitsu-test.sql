@@ -2,12 +2,17 @@
 -- PostgreSQL database dump
 --
 
+-- Dumped from database version 9.6.2
+-- Dumped by pg_dump version 9.6.2
+
 SET statement_timeout = 0;
 SET lock_timeout = 0;
+SET idle_in_transaction_session_timeout = 0;
 SET client_encoding = 'UTF8';
 SET standard_conforming_strings = on;
 SET check_function_bodies = false;
 SET client_min_messages = warning;
+SET row_security = off;
 
 --
 -- Name: plpgsql; Type: EXTENSION; Schema: -; Owner: 
@@ -30,7 +35,7 @@ SET default_tablespace = '';
 SET default_with_oids = false;
 
 --
--- Name: matches; Type: TABLE; Schema: public; Owner: Guest; Tablespace: 
+-- Name: matches; Type: TABLE; Schema: public; Owner: mf
 --
 
 CREATE TABLE matches (
@@ -43,14 +48,15 @@ CREATE TABLE matches (
     athlete_2_name character varying,
     athlete_1_belt character varying,
     athlete_2_belt character varying,
-    weight_class character varying
+    weight_class character varying,
+    matchurl character varying
 );
 
 
-ALTER TABLE matches OWNER TO "Guest";
+ALTER TABLE matches OWNER TO mf;
 
 --
--- Name: matches_id_seq; Type: SEQUENCE; Schema: public; Owner: Guest
+-- Name: matches_id_seq; Type: SEQUENCE; Schema: public; Owner: mf
 --
 
 CREATE SEQUENCE matches_id_seq
@@ -61,17 +67,17 @@ CREATE SEQUENCE matches_id_seq
     CACHE 1;
 
 
-ALTER TABLE matches_id_seq OWNER TO "Guest";
+ALTER TABLE matches_id_seq OWNER TO mf;
 
 --
--- Name: matches_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: Guest
+-- Name: matches_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: mf
 --
 
 ALTER SEQUENCE matches_id_seq OWNED BY matches.id;
 
 
 --
--- Name: moves; Type: TABLE; Schema: public; Owner: Guest; Tablespace: 
+-- Name: moves; Type: TABLE; Schema: public; Owner: mf
 --
 
 CREATE TABLE moves (
@@ -83,10 +89,10 @@ CREATE TABLE moves (
 );
 
 
-ALTER TABLE moves OWNER TO "Guest";
+ALTER TABLE moves OWNER TO mf;
 
 --
--- Name: moves_id_seq; Type: SEQUENCE; Schema: public; Owner: Guest
+-- Name: moves_id_seq; Type: SEQUENCE; Schema: public; Owner: mf
 --
 
 CREATE SEQUENCE moves_id_seq
@@ -97,46 +103,46 @@ CREATE SEQUENCE moves_id_seq
     CACHE 1;
 
 
-ALTER TABLE moves_id_seq OWNER TO "Guest";
+ALTER TABLE moves_id_seq OWNER TO mf;
 
 --
--- Name: moves_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: Guest
+-- Name: moves_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: mf
 --
 
 ALTER SEQUENCE moves_id_seq OWNED BY moves.id;
 
 
 --
--- Name: id; Type: DEFAULT; Schema: public; Owner: Guest
+-- Name: matches id; Type: DEFAULT; Schema: public; Owner: mf
 --
 
 ALTER TABLE ONLY matches ALTER COLUMN id SET DEFAULT nextval('matches_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: public; Owner: Guest
+-- Name: moves id; Type: DEFAULT; Schema: public; Owner: mf
 --
 
 ALTER TABLE ONLY moves ALTER COLUMN id SET DEFAULT nextval('moves_id_seq'::regclass);
 
 
 --
--- Data for Name: matches; Type: TABLE DATA; Schema: public; Owner: Guest
+-- Data for Name: matches; Type: TABLE DATA; Schema: public; Owner: mf
 --
 
-COPY matches (id, name, host_org, location, date, athlete_1_name, athlete_2_name, athlete_1_belt, athlete_2_belt, weight_class) FROM stdin;
+COPY matches (id, name, host_org, location, date, athlete_1_name, athlete_2_name, athlete_1_belt, athlete_2_belt, weight_class, matchurl) FROM stdin;
 \.
 
 
 --
--- Name: matches_id_seq; Type: SEQUENCE SET; Schema: public; Owner: Guest
+-- Name: matches_id_seq; Type: SEQUENCE SET; Schema: public; Owner: mf
 --
 
-SELECT pg_catalog.setval('matches_id_seq', 1, false);
+SELECT pg_catalog.setval('matches_id_seq', 10, true);
 
 
 --
--- Data for Name: moves; Type: TABLE DATA; Schema: public; Owner: Guest
+-- Data for Name: moves; Type: TABLE DATA; Schema: public; Owner: mf
 --
 
 COPY moves (id, match_id, name, description, difficulty) FROM stdin;
@@ -144,14 +150,14 @@ COPY moves (id, match_id, name, description, difficulty) FROM stdin;
 
 
 --
--- Name: moves_id_seq; Type: SEQUENCE SET; Schema: public; Owner: Guest
+-- Name: moves_id_seq; Type: SEQUENCE SET; Schema: public; Owner: mf
 --
 
 SELECT pg_catalog.setval('moves_id_seq', 1, false);
 
 
 --
--- Name: matches_pkey; Type: CONSTRAINT; Schema: public; Owner: Guest; Tablespace: 
+-- Name: matches matches_pkey; Type: CONSTRAINT; Schema: public; Owner: mf
 --
 
 ALTER TABLE ONLY matches
@@ -159,21 +165,11 @@ ALTER TABLE ONLY matches
 
 
 --
--- Name: moves_pkey; Type: CONSTRAINT; Schema: public; Owner: Guest; Tablespace: 
+-- Name: moves moves_pkey; Type: CONSTRAINT; Schema: public; Owner: mf
 --
 
 ALTER TABLE ONLY moves
     ADD CONSTRAINT moves_pkey PRIMARY KEY (id);
-
-
---
--- Name: public; Type: ACL; Schema: -; Owner: Guest
---
-
-REVOKE ALL ON SCHEMA public FROM PUBLIC;
-REVOKE ALL ON SCHEMA public FROM "Guest";
-GRANT ALL ON SCHEMA public TO "Guest";
-GRANT ALL ON SCHEMA public TO PUBLIC;
 
 
 --

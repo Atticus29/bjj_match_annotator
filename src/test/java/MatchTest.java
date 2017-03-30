@@ -8,7 +8,7 @@ public class MatchTest {
   @Before
   public void setUp() {
     testMatch = new Match("Finney_vs_Fisher_Bantam_Worlds_Gi_Final", "IBJJF Gi Worlds","Long Beach, CA" ,"05-01-2017", "Mark Fisher", "Chris Finney", "Bantam", "Brown",
-    "Brown");
+    "Brown", "https://youtu.be/AYdi8oupOcs");
     testMatch.save();
   }
 
@@ -31,6 +31,7 @@ public class MatchTest {
     assertEquals("Bantam", testMatch.getWeight_class());
     assertEquals("Brown", testMatch.getAthlete_1_belt());
     assertEquals("Brown", testMatch.getAthlete_2_belt());
+    assertEquals("https://youtu.be/AYdi8oupOcs", testMatch.getMatchURL());
     testMatch.setId(4);
     assertEquals(4, testMatch.getId());
   }
@@ -38,7 +39,7 @@ public class MatchTest {
   @Test
   public void all_returnsListOfMatches_List(){
     Match testMatch2 = new Match("Mendes_vs_Miyao_Light_Worlds_Gi_Final", "IBJJF Gi Worlds","Long Beach, CA" ,"05-01-2017", "Rafael Mendes", "Paulo Miyao", "Light", "Black",
-    "Black");
+    "Black", "https://youtu.be/AYdi8oupOcs");
     testMatch2.save();
     // System.out.println("Size is " + Match.all().size());
     // assertTrue(2,Match.all().size());
@@ -56,10 +57,10 @@ public class MatchTest {
   @Test
   public void equals_returnsWhetherTwoMatchesAreIdentical_true(){
     Match testMatch2 = new Match("Mendes_vs_Miyao_Light_Worlds_Gi_Final", "IBJJF Gi Worlds","Long Beach, CA" ,"05-01-2017", "Rafael Mendes", "Paulo Miyao", "Light", "Black",
-    "Black");
+    "Black", "https://youtu.be/AYdi8oupOcs");
     testMatch2.setId(1);
     Match testMatch3 = new Match("Mendes_vs_Miyao_Light_Worlds_Gi_Final", "IBJJF Gi Worlds","Long Beach, CA" ,"05-01-2017", "Rafael Mendes", "Paulo Miyao", "Light", "Black",
-    "Black");
+    "Black", "https://youtu.be/AYdi8oupOcs");
     testMatch3.setId(1);
     assertTrue(testMatch2.equals(testMatch3));
   }
@@ -67,7 +68,7 @@ public class MatchTest {
   @Test
   public void find_returnsTheMatchOfIdForSecondMatch_true(){
     Match testMatch2 = new Match("Mendes_vs_Miyao_Light_Worlds_Gi_Final", "IBJJF Gi Worlds","Long Beach, CA" ,"05-01-2017", "Rafael Mendes", "Paulo Miyao", "Light", "Black",
-    "Black");
+    "Black", "https://youtu.be/AYdi8oupOcs");
     testMatch2.save();
     System.out.println("Id is " + testMatch2.getId());
     assertEquals(testMatch2, Match.find(testMatch2.getId()));
@@ -82,7 +83,7 @@ public class MatchTest {
 
   @Test
   public void update_changesContentsOfMatchFromDataBase_true(){
-    testMatch.update("Mendes_vs_Miyao_Light_Worlds_Gi_Final", "IBJJF Gi Worlds","Long Beach, CA" ,"05-01-2017", "Rafael Mendes", "Gui Mendes", "Light", "Black", "Black");
+    testMatch.update("Mendes_vs_Miyao_Light_Worlds_Gi_Final", "IBJJF Gi Worlds","Long Beach, CA" ,"05-01-2017", "Rafael Mendes", "Gui Mendes", "Light", "Black", "Black", "https://youtu.be/AYdi8oupOcs");
     int testId = testMatch.getId();
     assertEquals("Gui Mendes", Match.find(testId).getAthlete_2_name());
   }
