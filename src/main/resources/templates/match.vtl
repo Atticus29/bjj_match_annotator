@@ -10,10 +10,11 @@
 <li>$match.getWeight_class()</li>
   <iframe width="560" height="315" src="$match.getMatchURL()" frameborder="0" allowfullscreen></iframe>
 <h4>Moves</h4>
-#foreach ($move in $moves)
-  <li><a href="/matches/$match.getId()/moves/$move.getId()">$move.getName()</a></li>
+#if ($moves.size() > 0)
+  #foreach ($move in $moves)
+    <li><a href="/matches/$match.getId()/moves/$move.getId()">$move.getName()</a></li>
+  #end
 #end
-
 
 <form action="/matches/$match.getId()/delete" method="post">
     <button type="submit" class="btn btn-danger">Delete Match</button>
@@ -24,5 +25,9 @@
 </form> -->
 <a href="/matches/$match.getId()/edit" class="btn btn-info">Edit Match Details</a>
 <br>
-<a href="/matches/$match.getId()/moves/new">Add another move</a>
+<form action="/matches/$match.getId()/moves/new" method="post">
+  <input type="hidden" name="match" value="$match">
+  <input type="hidden" name="origin" value="add-another">
+  <button type="submit" class="btn btn-warning">Add another move</button>
+</form>
 <!-- match.vtl -->

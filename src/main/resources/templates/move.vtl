@@ -1,0 +1,19 @@
+<!-- move.vtl -->
+<h3>$move.getName() Details</h3>
+<hr>
+<h5>Description - $move.getDescription()</h5>
+<h5>Difficulty Level - $move.getDifficulty()</h5>
+
+<a href="/matches/$match.getId()" class="btn btn-info">Back to $match.getName()</a>
+<br>
+<form action="/matches/$match.getId()/moves/$move.getId()/delete" method="post">
+  <input type="hidden" name="matchID" value="$match.getId()">
+  <input type="hidden" name="moveid" value="$move.getId()">
+  <button type="submit" class="btn btn-danger">Delete Move</button>
+</form>
+
+<form  action="/matches/$match.getId()/moves/$move.getId()/edit" method="post">
+  <input type="hidden" name="moveid" value="$move.getId()">
+  <button type="submit" class="btn btn-warn">Edit Move Details</button>
+</form>
+<!-- move.vtl -->
