@@ -94,4 +94,13 @@ public class Move {
         }
   }
 
+  public void delete() {
+    String sql = "DELETE FROM moves WHERE id=:id;";
+    try(Connection con = DB.sql2o.open()) {
+      con.createQuery(sql)
+        .addParameter("id", this.id)
+        .executeUpdate();
+    }
+  }
+
 }

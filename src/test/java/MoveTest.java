@@ -89,9 +89,12 @@ public class MoveTest {
 
     assertEquals("intermediate", Move.find(myMove.getId()).getDifficulty());
   }
+
+  @Test
+  public void delete_removesObjectFromDatabaseWithSameId_true() {
+    Move myMove = new Move(1, "guillotine choke", "forward-facing choke hold", "beginner");
+    myMove.save();
+    myMove.delete();
+    assertEquals(null, Move.find(myMove.getId()));
+  }
 }
-
-// methods to create:
-
-// update()
-// delete()
