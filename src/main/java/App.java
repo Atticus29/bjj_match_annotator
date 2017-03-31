@@ -50,9 +50,10 @@ public class App {
 
     post("/matches/:matchid", (request, response) -> {
       Map<String, Object> model = new HashMap<String, Object>();
-      System.out.println("all query params are " + request.queryParams());
+      // System.out.println("all query params are " + request.queryParams());
       String origin = request.queryParams("origin");
       int matchid = Integer.parseInt(request.params(":matchid"));
+      System.out.println("origin is " + origin);
       if(!origin.equals("update")){
         String name = request.queryParams("move-name");
         String description = request.queryParams("description");
@@ -61,7 +62,7 @@ public class App {
         newMove.save();
         model.put("moves", Match.find(matchid).getMoves(matchid));
       } else{
-        Match match = Match.find(matchid);
+        // Match match = Match.find(matchid);
         String name = request.queryParams("match-name");
         String hostOrg = request.queryParams("host-org");
         String location = request.queryParams("location");

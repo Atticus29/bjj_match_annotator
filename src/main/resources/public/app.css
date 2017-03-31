@@ -10,3 +10,13 @@
 .home-explain {
   border: 1px solid black;
 }
+
+#home-image{
+  width: 10%;
+}
+
+#logo{
+  width: 163%;
+  float: left;
+  height: auto;
+}
